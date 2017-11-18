@@ -264,4 +264,17 @@ public class NewUserViewController implements Initializable, ControllerClass {
         if (imageFileChanged)
             volunteer.copyImageFile();
     }
-   }
+    
+    
+    /**
+     * This method will log the user out of the application and return them to the
+     * LoginView scene
+     * @param volunteer 
+     */
+    public void logoutButtonPushed(ActionEvent event) throws IOException
+    {
+        SceneChanger.setLoggedInUser(null);
+        SceneChanger sc = new SceneChanger();
+        sc.changeScenes(event, "LoginView.fxml", "Login");
+    }
+}

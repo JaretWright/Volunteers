@@ -46,6 +46,21 @@ public class LogHoursViewController implements Initializable, ControllerClass {
         if (!SceneChanger.getLoggedInUser().isAdmin())
             backButton.setText("Edit");
     }    
+    
+    
+    /**
+     * This method will log the user out of the application and return them to the
+     * LoginView scene
+     * @param volunteer 
+     */
+    public void logoutButtonPushed(ActionEvent event) throws IOException
+    {
+        SceneChanger.setLoggedInUser(null);
+        SceneChanger sc = new SceneChanger();
+        sc.changeScenes(event, "LoginView.fxml", "Login");
+    }
+    
+    
 
     @Override
     public void preloadData(Volunteer volunteer) {

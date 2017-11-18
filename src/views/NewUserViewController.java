@@ -38,7 +38,10 @@ public class NewUserViewController implements Initializable, ControllerClass {
     @FXML private Label errMsgLabel;
     @FXML private Label headerLabel;
     @FXML private ImageView imageView;
+    
+    // used for controlling whether or not the user is an administrator
     @FXML private CheckBox adminCheckBox;
+    @FXML private Label adminLabel;
     
     
     private File imageFile;
@@ -131,6 +134,14 @@ public class NewUserViewController implements Initializable, ControllerClass {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         birthday.setValue(LocalDate.now().minusYears(18));
+        
+        //if the user logged in is not an admin user, do not show the admin
+        //checkbox
+        if (!SceneChanger.getLoggedInUser().isAdmin())
+        {
+            adminCheckBox.setVisible(false);
+            adminLabel.setVisible(false);
+        }
         
         imageFileChanged = false; //initially the image has not changed, use the default
         
@@ -236,6 +247,9 @@ public class NewUserViewController implements Initializable, ControllerClass {
         this.phoneTextField.setText(volunteer.getPhoneNumber());
         this.headerLabel.setText("Edit Volunteer");
         
+        if (volunteer.isAdmin())
+            adminCheckBox.setSelected(true);
+        
         //load the image 
         try{
             String imgLocation = ".\\src\\images\\" + volunteer.getImageFile().getName();
@@ -260,6 +274,7 @@ public class NewUserViewController implements Initializable, ControllerClass {
         volunteer.setPhoneNumber(phoneTextField.getText());
         volunteer.setBirthday(birthday.getValue());
         volunteer.setImageFile(imageFile);
+        volunteer.setAdmin(adminCheckBox.isSelected());
         
         if (imageFileChanged)
             volunteer.copyImageFile();

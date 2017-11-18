@@ -301,7 +301,8 @@ public class Volunteer {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
             
             //2.  create a String that holds our SQL update command with ? for user inputs
-            String sql = "UPDATE volunteers SET firstName = ?, lastName = ?, phoneNumber=?, birthday = ?, imageFile = ?"
+            String sql = "UPDATE volunteers SET firstName = ?, lastName = ?, "
+                    + "phoneNumber=?, birthday = ?, imageFile = ?, admin = ? "
                     + "WHERE volunteerID = ?";
             
             //3. prepare the query against SQL injection
@@ -316,7 +317,8 @@ public class Volunteer {
             preparedStatement.setString(3, phoneNumber);
             preparedStatement.setDate(4, bd);
             preparedStatement.setString(5, imageFile.getName());
-            preparedStatement.setInt(6, volunteerID);
+            preparedStatement.setBoolean(6, admin);
+            preparedStatement.setInt(7, volunteerID);
             
             //6. run the command on the SQL server
             preparedStatement.executeUpdate();

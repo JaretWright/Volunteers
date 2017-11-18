@@ -58,14 +58,14 @@
                         <Label text="Confirm Password" GridPane.rowIndex="5" />
                         <PasswordField fx:id="pwField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <PasswordField fx:id="confirmPwField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label text="Adminstrator" GridPane.rowIndex="6" />
+                        <Label fx:id="adminLabel" text="Adminstrator" GridPane.rowIndex="6" />
                         <CheckBox fx:id="adminCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                      <children>
                         <ImageView fx:id="imageView" fitHeight="185.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button mnemonicParsing="false" onAction="#chooseImageButtonPushed" text="Change Image" />
+                        <Button maxWidth="170.0" minWidth="170.0" mnemonicParsing="false" onAction="#chooseImageButtonPushed" prefWidth="170.0" text="Change Image" />
                      </children>
                   </VBox>
                </children>

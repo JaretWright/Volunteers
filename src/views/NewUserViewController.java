@@ -157,14 +157,24 @@ public class NewUserViewController implements Initializable, ControllerClass {
      */
     public void saveVolunteerButtonPushed(ActionEvent event)
     {
-        if (validPassword())
+        if (validPassword() || volunteer != null)
         {
             try
             {
                 if (volunteer != null) //we need to edit/update an existing volunteer
                 {
+                    //update the user information
                     updateVolunteer();
                     volunteer.updateVolunteerInDB();
+                    
+                    //update the password if it changed
+                    if (!pwField.getText().isEmpty())
+                    {
+                        if (validPassword())
+                        {
+                            volunteer.changePassword(pwField.getText());
+                        }
+                    }
                 }
                 else    //we need to create a new volunteer
                 {
@@ -250,6 +260,8 @@ public class NewUserViewController implements Initializable, ControllerClass {
         volunteer.setPhoneNumber(phoneTextField.getText());
         volunteer.setBirthday(birthday.getValue());
         volunteer.setImageFile(imageFile);
-        volunteer.copyImageFile();
+        
+        if (imageFileChanged)
+            volunteer.copyImageFile();
     }
    }

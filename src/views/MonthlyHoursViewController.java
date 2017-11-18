@@ -72,7 +72,7 @@ public class MonthlyHoursViewController implements Initializable {
         try
         {
             //1.  connect to the database
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer", "student", "student");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
             
             //2.  create the statement
             statement = conn.createStatement();

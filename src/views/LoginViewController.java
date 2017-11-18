@@ -43,7 +43,7 @@ public class LoginViewController implements Initializable {
         
         try{
             //1.  connect to the DB
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer", "student", "student");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
             
             //2.  create a query string with ? used instead of the values given by the user
             String sql = "SELECT * FROM volunteers WHERE volunteerID = ?";

@@ -249,7 +249,7 @@ public class Volunteer {
         try
         {
             //1. Connect to the database
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer", "student", "student");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
             
             //2. Create a String that holds the query with ? as user inputs
             String sql = "INSERT INTO volunteers (firstName, lastName, phoneNumber, birthday, imageFile, password, salt, admin)"
@@ -298,7 +298,7 @@ public class Volunteer {
         
         try{
             //1.  connect to the DB
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer", "student", "student");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
             
             //2.  create a String that holds our SQL update command with ? for user inputs
             String sql = "UPDATE volunteers SET firstName = ?, lastName = ?, phoneNumber=?, birthday = ?, imageFile = ?"
@@ -360,7 +360,7 @@ public class Volunteer {
         
         try{
             //1. connect to the database
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer", "student", "student");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
             
             //2. create a preparedStatement
             String sql = "INSERT INTO hoursWorked (volunteerID, dateWorked, hoursworked) VALUES (?,?,?);";
@@ -392,5 +392,49 @@ public class Volunteer {
         }
     }
     
-   
+   /**
+    * This method will create a new salt and encrypted password and store it in the 
+    * database
+    */
+    public void changePassword(String newPassword) throws NoSuchAlgorithmException, SQLException
+    {
+        salt = PasswordGenerator.getSalt();
+        password = PasswordGenerator.getSHA512Password(newPassword, salt);
+        
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        
+        try{
+            //1.  connect to the DB
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
+            
+            //2.  create a String that holds our SQL update command with ? for user inputs
+            String sql = "UPDATE volunteers SET password = ?, salt = ?"
+                         + "WHERE volunteerID = ?";
+            
+            //3. prepare the query against SQL injection
+            preparedStatement = conn.prepareStatement(sql);
+               
+            //4. bind the parameters
+            preparedStatement.setString(1, password);
+            preparedStatement.setBlob(2, new javax.sql.rowset.serial.SerialBlob(salt));
+            preparedStatement.setInt(3, volunteerID);
+            
+            //6. run the command on the SQL server
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        }
+        catch (SQLException e)
+        {
+            System.err.println(e.getMessage());
+        }
+        finally
+        {
+            if (conn != null)
+                conn.close();
+            if (preparedStatement != null)
+                preparedStatement.close();
+        }
+        
+    }
 }

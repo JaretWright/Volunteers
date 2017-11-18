@@ -106,7 +106,7 @@ public class VolunteerTableViewController implements Initializable {
         
         try{
             //1. connect to the database
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer", "student", "student");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/volunteer?useSSL=false", "student", "student");
             //2.  create a statement object
             statement = conn.createStatement();
             

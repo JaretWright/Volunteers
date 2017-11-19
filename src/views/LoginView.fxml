@@ -6,18 +6,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="views.LoginViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginViewController">
     <stylesheets>
         <URL value="@volunteer.css" />
     </stylesheets>
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="277.0" layoutY="100.0" prefHeight="600.0" prefWidth="800.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="277.0" layoutY="100.0" prefHeight="600.0" prefWidth="800.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label styleClass="header" text="Login" />
             <GridPane maxWidth="400.0" prefHeight="94.0" prefWidth="400.0" vgap="10.0">
@@ -38,6 +40,14 @@
             </GridPane>
             <Label fx:id="errMsgLabel" text="Label" />
             <Button mnemonicParsing="false" onAction="#loginButtonPushed" text="Login" />
+            <ImageView fitHeight="277.0" fitWidth="528.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/volunteer.jpg" />
+               </image>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </ImageView>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
